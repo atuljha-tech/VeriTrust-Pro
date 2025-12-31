@@ -1,32 +1,28 @@
-import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import { verifyToken } from "@/lib/serverAuth";
+import { logAudit } from "@/lib/repositories/audit.repo";
 
 export async function GET(req) {
   try {
-    const authHeader = req.headers.get("authorization");
+    const user = verifyToken(req);
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return NextResponse.json(
-        { success: false, message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
+    await logAudit({
+      actor: user,
+      action: "PROTECTED_ROUTE_ACCESS",
+      resourceType: "SYSTEM",
+      req,
+    });
 
-    const token = authHeader.split(" ")[1];
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    return NextResponse.json({
+    return Response.json({
       success: true,
       message: "Protected route accessed successfully",
       user: {
-        id: decoded.id,
-        role: decoded.role,
+        id: user.id,
+        role: user.role,
       },
     });
   } catch (error) {
-    return NextResponse.json(
-      { success: false, message: "Invalid or expired token" },
+    return Response.json(
+      { success: false, message: "Unauthorized" },
       { status: 401 }
     );
   }
