@@ -1,0 +1,35 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-12ef3651262410a23ca7a376a196c24b900a30a1",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/VeriTrustAnchor.sol": "project/contracts/VeriTrustAnchor.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/VeriTrustAnchor.sol": {
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.28;\n\ncontract VeriTrustAnchor {\n    // issuer address => credential hash => exists\n    mapping(address => mapping(bytes32 => bool)) private records;\n\n    event CredentialAnchored(\n        address indexed issuer,\n        bytes32 indexed credentialHash,\n        uint256 timestamp\n    );\n\n    function anchorCredential(bytes32 credentialHash) external {\n        require(!records[msg.sender][credentialHash], \"Already anchored\");\n\n        records[msg.sender][credentialHash] = true;\n\n        emit CredentialAnchored(\n            msg.sender,\n            credentialHash,\n            block.timestamp\n        );\n    }\n\n    function verifyCredential(\n        address issuer,\n        bytes32 credentialHash\n    ) external view returns (bool) {\n        return records[issuer][credentialHash];\n    }\n}\n"
+      }
+    }
+  }
+}

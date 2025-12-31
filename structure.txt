@@ -1,5 +1,16 @@
 .
 ./jsconfig.json
+./artifacts
+./artifacts/contracts
+./artifacts/contracts/VeriTrustAnchor.sol
+./artifacts/contracts/VeriTrustAnchor.sol/VeriTrustAnchor.json
+./artifacts/contracts/VeriTrustAnchor.sol/artifacts.d.ts
+./artifacts/blockchain
+./artifacts/blockchain/contracts
+./artifacts/artifacts.d.ts
+./artifacts/build-info
+./artifacts/build-info/solc-0_8_28-12ef3651262410a23ca7a376a196c24b900a30a1.json
+./artifacts/build-info/solc-0_8_28-12ef3651262410a23ca7a376a196c24b900a30a1.output.json
 ./Day 1 - The Foundation.md
 ./Day 2 — Secure User Registration.md
 ./.env.local
@@ -57,6 +68,9 @@
 ./app/globals.css
 ./app/login
 ./app/login/page.jsx
+./cache
+./cache/compile-cache.json
+./cache/build-info
 ./security
 ./security/rateLimit.js
 ./security/rbac.js
@@ -64,6 +78,8 @@
 ./security/hash.js
 ./security/permissions.js
 ./postcss.config.mjs
+./contracts
+./contracts/VeriTrustAnchor.sol
 ./utils
 ./utils/constants.js
 ./utils/validators.js
@@ -79,8 +95,10 @@
 ./blockchain
 ./blockchain/anchor.js
 ./blockchain/provider.js
+./blockchain/deploy.js
 ./blockchain/verify.js
 ./blockchain/revoke.js
+./Day 4 — Protected Routes & JWT Verification.md
 ./public
 ./public/file.svg
 ./public/vercel.svg
@@ -100,7 +118,10 @@
 ./lib/repositories/audit.repo.js
 ./lib/repositories/user.repo.js
 ./lib/repositories/org.repo.js
+./lib/serverAuth.js
 ./Day 3 — Login & JWT Authentication.md
+./tsconfig.json
 ./structure.txt
+./hardhat.config.ts
 ./eslint.config.mjs
 ./What is VeriTrust Pro.md
